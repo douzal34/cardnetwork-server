@@ -42,7 +42,7 @@ export default {
                 codepostal,
                 country,
                 city,
-                information
+                information,
                 UserId: me.id
             });
             return address;

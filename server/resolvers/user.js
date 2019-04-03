@@ -44,6 +44,18 @@ export default {
         }
       });
     },
+    isUser: async (parent, {
+      email
+    }, {
+      models
+    }) => {
+      const user = await models.User.findOne({
+        where: {
+          email
+        }
+      });
+      return user;
+    },
     me: async (parent, args, {
       models,
       me
@@ -86,7 +98,7 @@ export default {
 
     signIn: async (
       parent, {
-        login,
+        email,
         password
       }, {
         models,
@@ -95,7 +107,7 @@ export default {
     ) => {
       const user = await models.User.findOne({
         where: {
-          login
+          email
         }
       });
 

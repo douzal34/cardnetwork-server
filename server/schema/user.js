@@ -1,11 +1,12 @@
 import {
-    gql
+  gql
 } from 'apollo-server-express';
 
 export default gql `
   extend type Query {
     users: [User!]
     user(id: ID!): User
+    isUser(email: String!): User
     me: User
   }
 

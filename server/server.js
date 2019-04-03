@@ -100,6 +100,6 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 httpServer.listen(
-  9000, () => {
+  8000, () => {
     console.log(`Apollo Server on http://localhost:${config.port}/graphql`);
   });
