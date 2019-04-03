@@ -15,7 +15,7 @@ export default {
         }, {
             models
         }) => {
-            const file = await models.File.findOne({
+            const file = await models.File.find({
                 where: {
                     id
                 }

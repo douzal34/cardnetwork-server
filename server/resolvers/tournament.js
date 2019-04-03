@@ -15,7 +15,7 @@ export default {
         }, {
             models
         }) => {
-            const tournament = await models.Tournament.findOne({
+            const tournament = await models.Tournament.find({
                 where: {
                     id
                 }

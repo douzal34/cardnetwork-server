@@ -15,7 +15,7 @@ export default {
         }, {
             models
         }) => {
-            const address = await models.Address.findOne({
+            const address = await models.Address.find({
                 where: {
                     id
                 }

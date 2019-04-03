@@ -38,7 +38,7 @@ export default {
     }, {
       models
     }) => {
-      return await models.User.findOne({
+      return await models.User.find({
         where: {
           id
         }
@@ -49,7 +49,7 @@ export default {
     }, {
       models
     }) => {
-      const user = await models.User.findOne({
+      const user = await models.User.find({
         where: {
           email
         }

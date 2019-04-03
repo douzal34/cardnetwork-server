@@ -9,9 +9,7 @@ import {
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 
-import {
-  models
-} from './sqldb/index';
+import models from './sqldb/index';
 import schema from './schema';
 import resolvers from './resolvers';
 
@@ -82,6 +80,7 @@ const server = new ApolloServer({
   }) => {
     if (req) {
       const me = await getMe(req);
+      // console.log("log models on context init => ", models);
       return {
         models,
         me,

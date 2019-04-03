@@ -44,7 +44,7 @@ export default {
     }, {
       models
     }) => {
-      const partner = await models.Partner.findOne({
+      const partner = await models.Partner.find({
         where: {
           id
         }

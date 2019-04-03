@@ -5,70 +5,76 @@ import config from '../config/environment/index';
 import Sequelize from 'sequelize';
 
 const sequelize = new Sequelize(config.default.sequelize.uri, config.default.sequelize.user, config.default.sequelize.password, config.default.sequelize.options);
-const Score = sequelize.import('./models/score.model');
-const Ranking = sequelize.import('./models/ranking.model');
-const Tournament = sequelize.import('./models/Tournament.model');
-const TournamentType = sequelize.import('./models/tournamentType.model');
-const Registration = sequelize.import('./models/registration.model');
-const File = sequelize.import('./models/file.model');
-const Address = sequelize.import('./models/address.model');
-const Partner = sequelize.import('./models/partner.model');
-const User = sequelize.import('./models/user.model');
+const models = {
+  Score: sequelize.import('./models/score.model'),
+  Ranking: sequelize.import('./models/ranking.model'),
+  Tournament: sequelize.import('./models/Tournament.model'),
+  TournamentType: sequelize.import('./models/tournamentType.model'),
+  Registration: sequelize.import('./models/registration.model'),
+  File: sequelize.import('./models/file.model'),
+  Address: sequelize.import('./models/address.model'),
+  Partner: sequelize.import('./models/partner.model'),
+  User: sequelize.import('./models/user.model')
+}
 
-User.belongsTo(Partner, {
+models.User.belongsTo(models.Partner, {
   foreignKey: {
     name: 'PartnerId'
   },
   targetKey: 'id',
   as: 'partner'
 });
-Address.belongsTo(User, {
+models.Address.belongsTo(models.User, {
   foreignKey: 'UserId',
   as: 'user'
 });
-File.belongsTo(User, {
+models.File.belongsTo(models.User, {
   foreignKey: 'UserId',
   as: 'user'
 });
-Score.belongsTo(User, {
+models.Score.belongsTo(models.User, {
   foreignKey: 'UserId',
   as: 'user'
 })
-Tournament.belongsTo(TournamentType, {
+models.Tournament.belongsTo(models.TournamentType, {
   foreignKey: 'TournamentTypeId',
   as: 'tournamentType'
 });
-Tournament.belongsTo(Partner, {
+models.Tournament.belongsTo(models.Partner, {
   foreignKey: 'PartnerId',
   as: 'partner'
 });
-Ranking.belongsTo(Tournament, {
+models.Ranking.belongsTo(models.Tournament, {
   foreignKey: 'TournamentId',
   as: 'tournament'
 });
-Ranking.belongsTo(User, {
+models.Ranking.belongsTo(models.User, {
   foreignKey: 'UserId',
   as: 'user'
 });
-Registration.belongsTo(Tournament, {
+models.Registration.belongsTo(models.Tournament, {
   foreignKey: 'TournamentId',
   as: 'tournament'
 });
-Registration.belongsTo(User, {
+models.Registration.belongsTo(models.User, {
   foreignKey: 'UserId',
   as: 'user'
 });
 
-TournamentType.hasMany(Tournament);
-Partner.hasMany(Tournament);
-Tournament.hasMany(Registration);
-Tournament.hasMany(Ranking);
-User.hasMany(File);
-User.hasMany(Registration);
-User.hasMany(Ranking);
+models.TournamentType.hasMany(models.Tournament);
+models.Partner.hasMany(models.Tournament);
+models.Tournament.hasMany(models.Registration);
+models.Tournament.hasMany(models.Ranking);
+models.User.hasMany(models.File);
+models.User.hasMany(models.Registration);
+models.User.hasMany(models.Ranking);
 
 sequelize.sync().then(() => {
   console.log("database connected !!");
 });
 
-export default sequelize;
+export {
+  sequelize
+};
+
+export default models;

@@ -15,7 +15,7 @@ export default {
         }, {
             models
         }) => {
-            const score = await models.Score.findOne({
+            const score = await models.Score.find({
                 where: {
                     id
                 }

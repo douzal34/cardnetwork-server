@@ -15,7 +15,7 @@ export default {
         }, {
             models
         }) => {
-            const registration = await models.Registration.findOne({
+            const registration = await models.Registration.find({
                 where: {
                     id
                 }

@@ -15,7 +15,7 @@ export default {
         }, {
             models
         }) => {
-            return await models.Ranking.findOne({
+            return await models.Ranking.find({
                 where: {
                     id
                 }
