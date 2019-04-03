@@ -2,6 +2,9 @@ import tools from '../../components/tools'
 
 const user = (sequelize, DataTypes) => {
   let User = sequelize.define('User', {
+    username: {
+      type: DataTypes.STRING
+    },
     email: {
       type: DataTypes.STRING,
     },

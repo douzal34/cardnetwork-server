@@ -15,7 +15,6 @@ const Address = sequelize.import('./models/address.model');
 const Partner = sequelize.import('./models/partner.model');
 const User = sequelize.import('./models/user.model');
 
-// Has One
 User.belongsTo(Partner, {
   foreignKey: {
     name: 'PartnerId'
@@ -31,7 +30,10 @@ File.belongsTo(User, {
   foreignKey: 'UserId',
   as: 'user'
 });
-
+Score.belongsTo(User, {
+  foreignKey: 'UserId',
+  as: 'user'
+})
 Tournament.belongsTo(TournamentType, {
   foreignKey: 'TournamentTypeId',
   as: 'tournamentType'
@@ -57,7 +59,6 @@ Registration.belongsTo(User, {
   as: 'user'
 });
 
-// Has Many
 TournamentType.hasMany(Tournament);
 Partner.hasMany(Tournament);
 Tournament.hasMany(Registration);

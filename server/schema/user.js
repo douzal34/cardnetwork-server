@@ -23,5 +23,9 @@ export default gql `
     username: String!
     email: String!
     password: String!
+    mobile: String!
+    createdAt: Date!
+    deletedAt: Date!
+    updatedAt: Date!
   }
 `;
