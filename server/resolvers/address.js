@@ -33,7 +33,8 @@ export default {
             city,
             information
         }, {
-            models
+            models,
+            me
         }) => {
             const address = await models.Address.create({
                 streetnumber,
@@ -42,6 +43,7 @@ export default {
                 country,
                 city,
                 information
+                UserId: me.id
             });
             return address;
         }

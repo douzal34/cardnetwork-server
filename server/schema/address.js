@@ -9,17 +9,17 @@ export default gql `
   }
 
   extend type Mutation {
-    createAddress(streetnumber: STRING!, street: STRING!, codepostal: STRING!, country: STRING!, city: STRING!, information: STRING): Address
+    createAddress(streetnumber: String!, street: String!, codepostal: String!, country: String!, city: String!, information: String): Address
   }
 
   type Address {
     id: ID!
-    streetnumber: STRING!
-    street: STRING!
-    codepostal: STRING!
-    country: STRING!
-    city: STRING!
-    information: STRING!
+    streetnumber: String!
+    street: String!
+    codepostal: String!
+    country: String!
+    city: String!
+    information: String!
     createdAt: Date!
     updatedAt: Date!
     deletedAt: Date!

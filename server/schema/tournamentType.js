@@ -9,12 +9,12 @@ export default gql `
   }
 
   extend type Mutation {
-    createTournamentType(name: STRING!): TournamentType
+    createTournamentType(name: String!): TournamentType
   }
 
   type TournamentType {
     id: ID!
-    name: STRING!
+    name: String!
     createdAt: Date!
     updatedAt: Date!
     deletedAt: Date!

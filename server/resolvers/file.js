@@ -29,11 +29,13 @@ export default {
             path,
             type,
         }, {
-            models
+            models,
+            me
         }) => {
             const file = await models.File.create({
                 path,
                 type,
+                UserId: me.id
             });
             return file;
         }

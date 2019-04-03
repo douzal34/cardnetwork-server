@@ -9,14 +9,14 @@ export default gql `
   }
 
   extend type Mutation {
-    createRanking(position: INT! , point: INT!, UserId): Ranking
-    updateRanking(position: INT!, point: INT!): Ranking
+    createRanking(position: Int! , point: Int!, UserId: ID!): Ranking
+    updateRanking(position: Int!, point: Int!): Ranking
   }
 
   type Ranking {
     id: ID!
-    position: INT!
-    point: INT!
+    position: Int!
+    point: Int!
     createdAt: Date!
     updatedAt: Date!
     deletedAt: Date!

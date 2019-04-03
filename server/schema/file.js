@@ -9,13 +9,13 @@ export default gql `
   }
 
   extend type Mutation {
-    createFile(path: STRING!, type: INT!): File
+    createFile(path: String!, type: Int!): File
   }
 
   type File {
     id: ID!
-    path: STRING!
-    type: INT!
+    path: String!
+    type: Int!
     createdAt: Date!
     updatedAt: Date!
     deletedAt: Date!

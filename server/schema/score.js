@@ -9,15 +9,15 @@ export default gql `
   }
 
   extend type Mutation {
-    createScore(total: INT! , hebdo: INT!, onmonth: INT!): Score
-    updateScore(total: INT!, hebdo: INT!, onmonth: INT!): Score
+    createScore(total: Int! , hebdo: Int!, onmonth: Int!): Score
+    updateScore(total: Int!, hebdo: Int!, onmonth: Int!): Score
   }
 
   type Score {
     id: ID!
-    total: INT!
-    hebdo: INT!
-    onmonth: INT!
+    total: Int!
+    hebdo: Int!
+    onmonth: Int!
     createdAt: Date!
     updatedAt: Date!
     deletedAt: Date!
