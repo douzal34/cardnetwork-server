@@ -11,21 +11,6 @@ import {
 } from './authorization';
 import tools from '../components/tools';
 
-const createToken = async (user, secret, expiresIn) => {
-  const {
-    id,
-    email,
-    username,
-  } = user;
-  return await jwt.sign({
-    id,
-    email,
-    username,
-  }, secret, {
-    expiresIn,
-  });
-};
-
 export default {
   Query: {
     users: async (parent, args, {
@@ -87,13 +72,10 @@ export default {
       const user = await models.User.create({
         username,
         email,
-        mobile,
         password,
+        mobile
       });
-
-      return {
-        token: createToken(user, secret, '30m')
-      };
+      return { token: tools.createToken(user, secret, '30m') };
     },
 
     signIn: async (
@@ -117,19 +99,14 @@ export default {
         );
       }
 
-      const isValid = await tools.validatePassword(password);
+      const isValid = await tools.validatePassword(password, user.password);
 
       if (!isValid) {
         throw new AuthenticationError('Invalid password.');
       }
 
-      // console.log('isvalide -> ', isValid);
-      // console.log("log user -> ", user);
-      // console.log("log create token -> ", createToken(user, secret, '30m'));
-      // console.log("log secret -> ", secret);
-
       return {
-        token: createToken(user, secret, '30m')
+        token: tools.createToken(user, secret, '360d')
       }
     }
 

@@ -4,7 +4,8 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import logger from './components/logger';
 import {
-  ApolloServer
+  ApolloServer,
+  AuthenticationError
 } from "apollo-server-express";
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -46,14 +47,15 @@ const onError = (err, req, res, next) => {
 
 const getMe = async req => {
   const token = req.headers['x-token'];
-
   if (token) {
     try {
-      return await jwt.verify(token, process.env.SECRET);
-    } catch (e) {
-      throw new AuthenticationError(
-        'Your session expired. Sign in again.',
-      );
+      return await jwt.verify(token, config.default.secrets.session);
+    } 
+    catch (e) {
+      // throw new AuthenticationError(
+        // 'Your session expired. Sign in again.',
+      // );
+      return e;
     }
   }
 };
@@ -66,6 +68,7 @@ const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
   formatError: error => {
+    console.log("log error => ", error.message);
     const message = error.message
       .replace('SequelizeValidationError: ', '')
       .replace('Validation error: ', '');
@@ -80,11 +83,10 @@ const server = new ApolloServer({
   }) => {
     if (req) {
       const me = await getMe(req);
-      // console.log("log models on context init => ", models);
       return {
         models,
         me,
-        secret: 'cardnetwork-key',
+        secret: config.default.secrets.session,
       };
     }
   },
@@ -96,7 +98,7 @@ server.applyMiddleware({
 });
 
 const httpServer = http.createServer(app);
-server.installSubscriptionHandlers(httpServer);
+// server.installSubscriptionHandlers(httpServer);
 
 httpServer.listen(
   8000, () => {

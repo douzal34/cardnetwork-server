@@ -16,6 +16,6 @@ export default {
     }
   },
   secrets: {
-    session: "cardnetwork-sql-secret-production"
+    session: "cardnetwork-secret-production"
   }
 };

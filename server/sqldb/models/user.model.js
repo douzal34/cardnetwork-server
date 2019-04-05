@@ -23,7 +23,7 @@ const user = (sequelize, DataTypes) => {
   });
 
   User.beforeCreate(async user => {
-    user.password = await tools.generatePasswordHash();
+    user.password = await tools.generatePasswordHash(user.password);
   });
 
   return User;
