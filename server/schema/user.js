@@ -16,6 +16,7 @@ export default gql `
       email: String!
       password: String!
       mobile: String!
+      role: String!
     ): Token!
 
     signIn(email: String!, password: String!): Token!
@@ -31,6 +32,7 @@ export default gql `
     email: String!
     password: String!
     mobile: String!
+    role: String!
     createdAt: Date!
     deletedAt: Date!
     updatedAt: Date!

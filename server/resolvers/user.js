@@ -63,7 +63,8 @@ export default {
         username,
         email,
         password,
-        mobile
+        mobile,
+        role,
       }, {
         models,
         secret
@@ -73,7 +74,8 @@ export default {
         username,
         email,
         password,
-        mobile
+        mobile,
+        role
       });
       return { token: tools.createToken(user, secret, '30m') };
     },
@@ -95,14 +97,14 @@ export default {
 
       if (!user) {
         throw new UserInputError(
-          'No user found with this login credentials.'
+          `Aucun Utilisateur n'est enregistré avec cet email ${email} !`
         );
       }
 
       const isValid = await tools.validatePassword(password, user.password);
 
       if (!isValid) {
-        throw new AuthenticationError('Invalid password.');
+        throw new AuthenticationError('Mauvais mot de passe !');
       }
 
       return {

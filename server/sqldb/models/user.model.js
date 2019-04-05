@@ -17,6 +17,9 @@ const user = (sequelize, DataTypes) => {
     mobile: {
       type: DataTypes.STRING
     },
+    role: {
+      type: DataTypes.STRING
+    },
   }, {
     timestamps: true,
     paranoid: true,
