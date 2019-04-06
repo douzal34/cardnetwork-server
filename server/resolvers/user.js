@@ -48,12 +48,12 @@ export default {
       if (!me) {
         return null;
       }
-
-      return await models.User.findOne({
+      const user = await models.User.findOne({
         where: {
           id: me.id
         }
       });
+      return user;
     },
   },
 
